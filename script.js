@@ -1,3 +1,5 @@
+"use strict";
+
 /*const person = {
     name: "Alexander",
     age: 25,
@@ -34,19 +36,170 @@ document.write(answers); //выводит массив, заполненный �
 
 //const answers = [];
 
-let numberOfFilms = +prompt("Сколько фильмов вы уже посмотрели?", "");
+let numberOfFilms;
+
+function start() {
+    numberOfFilms = +prompt("Сколько фильмов вы уже посмотрели?", "");
+    while (numberOfFilms == '' || numberOfFilms == null || isNaN(numberOfFilms)) {
+        numberOfFilms = +prompt("Сколько фильмов вы уже посмотрели?", "");
+    }
+}
+
+start();
 
 const personalMovieDB = {
     count: numberOfFilms,
-    movies : {},
-    actors : {},
-    genres : [],
+    movies: {},
+    actors: {},
+    genres: [],
     privat: false
 };
 
-let lastMovie = prompt("Один из последних просмотренных фильмов?", "");
-let lastMovieMark = prompt("На сколько оцените его?", "");
+function rememberMyFilms() {
+    for (let i = 0; i < 2; i++) {
+        let lastMovie = prompt("Один из последних просмотренных фильмов?", ""),
+            lastMovieMark = prompt("На сколько оцените его?", "");
 
-personalMovieDB.movies[lastMovie] = lastMovieMark; //работа через квадратные скобки защищает от ошибок
+        if (lastMovie != null && lastMovieMark != null && lastMovie != '' && lastMovieMark != '' && lastMovie.length < 50) {
+            personalMovieDB.movies[lastMovie] = lastMovieMark; //работа через квадратные скобки защищает от ошибок*/
+        } else {
+            i--;
+        }
+    }
+}
 
-console.log(personalMovieDB.movies);
+rememberMyFilms();
+
+function detectPersonalLevel() {
+    if (personalMovieDB.count < 10) {
+        console.log('Мало');
+    } else if (personalMovieDB.count >= 10 && personalMovieDB.count < 30) {
+        console.log('Норма');
+    } else if (personalMovieDB.count >= 30) {
+        console.log('Много');
+    } else {
+        console.log('Смешно');
+    }
+}
+
+detectPersonalLevel();
+
+function writeYourGenres() {
+    for (let i = 0; i < 3; i++) {
+        let lovelyGenre = prompt(`Ваш любимый жанр под номером ${i+1}?`, "");
+
+        if (lovelyGenre != null && lovelyGenre != '' && isNaN(lovelyGenre)) {
+            personalMovieDB.genres[i] = lovelyGenre; //работа через квадратные скобки защищает от ошибок*/
+        } else {
+            i--;
+        }
+    }
+}
+
+writeYourGenres();
+
+function showMyDB() {
+    if (personalMovieDB.privat == false) {
+        console.log(personalMovieDB);
+    }
+}
+
+showMyDB();
+
+
+
+
+
+
+/*const num = 100;
+(num == 99) ? console.log('да') : console.log('нет');
+
+switch (num) { //строгое сравнение ===
+    case 99:
+        console.log('no');
+        break;
+    case 49:
+        console.log('no');
+        break; //если совпадение, чтобы не пошел проверять дальше
+    case '100':
+        console.log('yes');
+        break;
+    default: //если ни одного совпадения
+        console.log('fuck');
+        break;
+}*/
+
+/*let num = 56;
+
+while (num <= 55) {
+    console.log(num);
+    num++;
+}
+
+do { // сперва сделай, потом проверь, а выше наоборот
+    console.log(num);
+    num++;
+}
+while (num <= 55);*/
+
+
+
+/*for (let i = 1; i < 10; i++) {
+    if (i === 6) {
+        //break; останавливает выполнение цикла
+        continue; //пропускает выполнение при выполнении условия
+    }
+    console.log(i);
+}*/
+
+/*function soon() {
+    console.log("A lot of money (minimum 1000$) every month");
+}
+
+soon(); //вызов функции
+
+function soonSoosoon(text) {
+    console.log(text);
+}
+
+soonSoosoon("POOPA"); // вызов функции с передачей переменной, которая поступает ей на вход*/
+
+/*function calc(a, b) {
+    return (a + b); //после return код перестает отрабатываться, это конец выполнения функции
+}
+
+console.log(calc(11, 12));
+console.log(calc(700, 77));
+console.log(calc(500, 500));*/
+
+/*function up() {
+    let num = 50;
+    return num;
+}
+
+const upNum = up();
+console.log(upNum); //с помощью return локальные переменные можно сделать глобальными*/
+
+/* const logger = function() { //данная функция создается только после объявления
+    console.log("Hello!")
+};
+
+logger(); */
+
+/* const calc = (a, b) => {
+    console.log('1');
+    return a + b;
+};
+
+console.log(calc(3, 4));
+// если функция в 1 строчку, то можно опускать фигурные скобки
+const simpleCalc = (a, b) => a + b; */
+
+// console.log('ABCDEFGHI'.substr(4, 2));
+
+/* const num = 12.2;
+console.log(Math.round(num)); //округление
+
+const test = "12.2px";
+console.log(parseInt(test)); //целое число из строки
+console.log(parseFloat(test)); //с плавающей запятой */
