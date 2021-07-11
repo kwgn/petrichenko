@@ -1,50 +1,73 @@
 "use strict";
 
-const options = {
-    name: "test",
-    width: 1024,
-    height: 1024,
-    colors: {
-        border: "black",
-        bg: "green"
-    },
-    makeTest: function() {
-        console.log("Nasq - butt");
-    }
-};
+const personalMovieDB = {
 
-options.makeTest();
-const {border, bg} = options.colors;
-console.log(border);
+    count: '',
 
-//console.log(options);
-//console.log(options.colors.border);
-//delete options.name;
-//console.log(options);
+    movies: {},
 
-for (let key in options) {
-    if (typeof (options[key]) === 'object') {
-        for (let i in options[key]) {
-            console.log(`Свойство ${i} имеет значение ${options[key][i]}`);
+    actors: {},
+
+    genres: [],
+
+    privat: true,
+
+    start: function () {
+        let numberOfFilms;
+        while (numberOfFilms == '' || isNaN(numberOfFilms)) {
+            numberOfFilms = +prompt("Сколько фильмов посмотрел?", '1');
         }
-    } else {
-        console.log(`Свойство ${key} имеет значение ${options[key]}`);
+        personalMovieDB.count = numberOfFilms;
+    },
+
+    rememberMyFilms: function () {
+        let i = 0;
+        while (i < 2) {
+            let lastMovie = prompt("Последний фильм?", 'Железный человек'),
+                lastMovieMark = +prompt("Дай ему оценку", '8');
+            if (lastMovie != '' && lastMovie != null && lastMovie != undefined && lastMovie.length <= 50 && !isNaN(lastMovieMark)) {
+                personalMovieDB.movies[lastMovie] = lastMovieMark;
+                i++;
+            }
+        }
+    },
+
+    writeYourGenres: function () {
+        let favouriteGenre;
+        for (let i = 1; i < 4; i++) {
+            favouriteGenre = prompt(`Ваш любимый жанр под номером ${i}?`);
+            (favouriteGenre != '' && favouriteGenre != null && isNaN(favouriteGenre)) ? (personalMovieDB.genres[i - 1] = favouriteGenre) : i--;
+        }
+        personalMovieDB.genres.forEach((elem, i) => {
+            console.log(`Любимый жанр #${i+1} - это ` + elem);
+        })
+    },
+
+    showMyDB: function () {
+        if (personalMovieDB.privat == false) {
+            console.log(personalMovieDB);
+        }
+    },
+
+    detectedPersonalLevel: function () {
+        if (personalMovieDB.count < 10) {
+            console.log("Мало");
+        } else if (personalMovieDB.count >= 10 && personalMovieDB.count <= 30) {
+            console.log("Нормально");
+        } else if (personalMovieDB.count > 30) {
+            console.log("Много");
+        } else {
+            console.log("Косяк");
+        }
+    },
+
+    toggleVisibleMyDB: function () {
+        personalMovieDB.privat == false ? personalMovieDB.privat = true : personalMovieDB.privat = false;
     }
-}
-
-console.log(Object.keys(options).length);
-
-const arr1 = {
-    a: 1
 };
-
-const arr2 = {
-    b: 2
-};
-
-const arr3 = {
-    c: 3
-};
-
-const newArr = Object.assign(arr1, arr2, arr3);
-console.log(newArr);
+personalMovieDB.start();
+personalMovieDB.rememberMyFilms();
+personalMovieDB.writeYourGenres();
+personalMovieDB.detectedPersonalLevel();
+personalMovieDB.toggleVisibleMyDB();
+personalMovieDB.showMyDB();
